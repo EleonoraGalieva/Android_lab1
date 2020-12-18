@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#FFC107</item>
+        <item name="colorPrimaryDark">#F44336</item>
+        <item name="colorAccent">#FF5722</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+</resources>

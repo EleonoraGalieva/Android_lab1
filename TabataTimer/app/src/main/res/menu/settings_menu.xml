@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/addSets"
+        android:icon="@drawable/ic_sets"
+        android:title="@string/add_sets"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/editTitle"
+        android:icon="@drawable/ic_title"
+        android:title="@string/edit_title"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/chooseColor"
+        android:icon="@drawable/ic_colors"
+        android:title="@string/choose_colors"
+        app:showAsAction="always" />
+</menu>
