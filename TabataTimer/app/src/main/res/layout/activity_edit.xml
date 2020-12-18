@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/editList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end|right"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabPrep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/preparation"
+                android:tint="@color/grey_80"
+                app:backgroundTint="@color/grey_20"
+                app:fabSize="mini"
+                app:rippleColor="@color/white"
+                app:srcCompat="@drawable/ic_preparation" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:contentDescription="work"
+                android:tint="@color/grey_80"
+                app:backgroundTint="@color/grey_20"
+                app:fabSize="mini"
+                app:rippleColor="@color/white"
+                app:srcCompat="@drawable/ic_work" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRelax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/relax"
+                android:tint="@color/grey_80"
+                app:backgroundTint="@color/grey_20"
+                app:fabSize="mini"
+                app:rippleColor="@color/white"
+                app:srcCompat="@drawable/ic_relax" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRelaxBetweenSets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/relax_between_sets"
+                android:tint="@color/grey_80"
+                app:backgroundTint="@color/grey_20"
+                app:fabSize="mini"
+                app:rippleColor="@color/white"
+                app:srcCompat="@drawable/ic_relax_between_sets" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/create_new_phase"
+                app:fabSize="normal"
+                app:rippleColor="@color/white"
+                app:srcCompat="@drawable/ic_add" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/save"
+            android:textColor="#000" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
