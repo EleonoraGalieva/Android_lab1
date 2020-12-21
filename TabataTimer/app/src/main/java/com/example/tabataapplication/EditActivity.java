@@ -2,13 +2,17 @@ package com.example.tabataapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -29,6 +33,7 @@ import com.example.tabataapplication.databinding.ActivityEditBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -63,70 +68,76 @@ public class EditActivity extends AppCompatActivity {
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(binding.editList);
 
-        binding.create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EditActivity.this, MainActivity.class);
-                if (list.size() != 0) {
-                    databaseAdapter.close();
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(v.getContext(), "Add at least one phase", Toast.LENGTH_LONG).show();
-                }
+        LocalBroadcastManager.getInstance(this).registerReceiver(phaseReceiver,
+                new IntentFilter("phase-changed"));
+
+        binding.create.setOnClickListener(v -> {
+            Intent intent1 = new Intent(EditActivity.this, MainActivity.class);
+            if (list.size() != 0) {
+                databaseAdapter.close();
+                startActivity(intent1);
+            } else {
+                Toast.makeText(v.getContext(), "Add at least one phase", Toast.LENGTH_LONG).show();
             }
         });
 
-        binding.fabCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animation(v);
-            }
+        binding.fabCreate.setOnClickListener(v -> animation(v));
+        binding.fabPrep.setOnClickListener(v -> {
+            Phase newPhase = new Phase(idSeq, Action.PREPARATION, getResources().getDrawable(R.drawable.ic_preparation_color), 5, "");
+            list.add(newPhase);
+            databaseAdapter.insertPhase(newPhase);
+            editDataAdapter.notifyDataSetChanged();
+            animation(v);
         });
-        binding.fabPrep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Phase newPhase = new Phase(idSeq, Action.PREPARATION, getResources().getDrawable(R.drawable.ic_preparation_color), 5, "");
-                list.add(newPhase);
-                databaseAdapter.insertPhase(newPhase);
-                editDataAdapter.notifyDataSetChanged();
-                animation(v);
-            }
+        binding.fabWork.setOnClickListener((View.OnClickListener) v -> {
+            Phase newPhase = new Phase((int) idSeq, Action.WORK, getResources().getDrawable(R.drawable.ic_work_color), 10, "");
+            list.add(newPhase);
+            databaseAdapter.insertPhase(newPhase);
+            editDataAdapter.notifyDataSetChanged();
+            animation(v);
         });
-        binding.fabWork.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Phase newPhase = new Phase((int) idSeq, Action.WORK, getResources().getDrawable(R.drawable.ic_work_color), 10, "");
-                list.add(newPhase);
-                databaseAdapter.insertPhase(newPhase);
-                editDataAdapter.notifyDataSetChanged();
-                animation(v);
-            }
+        binding.fabRelax.setOnClickListener((View.OnClickListener) v -> {
+            Phase newPhase = new Phase((int) idSeq, Action.RELAX, getResources().getDrawable(R.drawable.ic_relax_color), 3, "");
+            list.add(newPhase);
+            databaseAdapter.insertPhase(newPhase);
+            editDataAdapter.notifyDataSetChanged();
+            animation(v);
         });
-        binding.fabRelax.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Phase newPhase = new Phase((int) idSeq, Action.RELAX, getResources().getDrawable(R.drawable.ic_relax_color), 3, "");
-                list.add(newPhase);
-                databaseAdapter.insertPhase(newPhase);
-                editDataAdapter.notifyDataSetChanged();
-                animation(v);
-            }
-        });
-        binding.fabRelaxBetweenSets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Phase newPhase = new Phase((int) idSeq, Action.RELAX_BETWEEN_SETS, getResources().getDrawable(R.drawable.ic_relax_between_sets_color), 2, "");
-                list.add(newPhase);
-                databaseAdapter.insertPhase(newPhase);
-                editDataAdapter.notifyDataSetChanged();
-                animation(v);
-            }
+        binding.fabRelaxBetweenSets.setOnClickListener((View.OnClickListener) v -> {
+            Phase newPhase = new Phase((int) idSeq, Action.RELAX_BETWEEN_SETS, getResources().getDrawable(R.drawable.ic_relax_between_sets_color), 2, "");
+            list.add(newPhase);
+            databaseAdapter.insertPhase(newPhase);
+            editDataAdapter.notifyDataSetChanged();
+            animation(v);
         });
         ViewAnimation.init(binding.fabPrep);
         ViewAnimation.init(binding.fabWork);
         ViewAnimation.init(binding.fabRelax);
         ViewAnimation.init(binding.fabRelaxBetweenSets);
     }
+
+    public BroadcastReceiver phaseReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle extras = intent.getExtras();
+            assert extras != null;
+            ActionBroadcast action = (ActionBroadcast) extras.getSerializable("action");
+            int phasePosition = extras.getInt("phase-id");
+
+            switch (Objects.requireNonNull(action)) {
+                case CHANGE: {
+                    Phase phaseToChange = list.get(phasePosition);
+                    databaseAdapter.updatePhase(phaseToChange);
+                }
+                break;
+                case DELETE: {
+                    Phase phaseToDelete = list.get(phasePosition);
+                    databaseAdapter.deletePhase(phaseToDelete.getId());
+                }
+                break;
+            }
+        }
+    };
 
     private void animation(View v) {
         isRotate = ViewAnimation.rotateFab(v, !isRotate);

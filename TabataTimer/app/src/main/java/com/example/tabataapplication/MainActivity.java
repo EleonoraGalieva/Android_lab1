@@ -2,11 +2,15 @@ package com.example.tabataapplication;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +19,12 @@ import android.widget.Button;
 import com.example.tabataapplication.Adapters.SeqDataAdapter;
 import com.example.tabataapplication.DatabaseHelper.DatabaseAdapter;
 import com.example.tabataapplication.ItemTouchHelper.SimpleItemTouchHelperCallback;
+import com.example.tabataapplication.Models.Phase;
 import com.example.tabataapplication.Models.Sequence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     List<Sequence> sequenceList = new ArrayList<>();
@@ -50,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerView);
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(sequenceReceiver,
+                new IntentFilter("sequence"));
+
         btnSeqAdd.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, EditActivity.class);
             String basicSequenceTitle = "Sequence " + String.valueOf(databaseAdapter.getCountSequence() + 1);
@@ -61,10 +70,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSettings.setOnClickListener(v -> {
-            Intent intent= new Intent(v.getContext(), SettingsActivity.class);
+            Intent intent = new Intent(v.getContext(), SettingsActivity.class);
             startActivityForResult(intent, 1);
         });
     }
+
+    public BroadcastReceiver sequenceReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int sequenceId = intent.getIntExtra("sequence-id", 0);
+            databaseAdapter.deleteSequence(sequenceId);
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
