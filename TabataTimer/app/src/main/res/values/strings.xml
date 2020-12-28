@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">TabataApplication</string>
+    <string name="create_new_sequence">Create new sequence</string>
+    <string name="tabata_timer">Tabata timer</string>
+    <string name="pause" translatable="false">pause</string>
+    <string name="stop" translatable="false">stop</string>
+    <string name="start" translatable="false">start</string>
+    <string name="example_time" translatable="false">10:00</string>
+    <string name="previous" translatable="false">previous</string>
+    <string name="next" translatable="false">next</string>
+    <string name="action_image" translatable="false">actionImage</string>
+    <string name="create_new_phase">Create new phase</string>
+    <string name="preparation" translatable="false">preparation</string>
+    <string name="relax" translatable="false">relax</string>
+    <string name="relax_between_sets" translatable="false">relax between sets</string>
+    <string name="edit_image" translatable="false">edit_image</string>
+    <string name="add_some_description">Add some description</string>
+    <string name="increase" translatable="false">increase</string>
+    <string name="decrease" translatable="false">decrease</string>
+    <string name="create">Create</string>
+    <string name="add_sets" translatable="false">add sets</string>
+    <string name="edit_title" translatable="false">edit title</string>
+    <string name="choose_colors" translatable="false">choose colors</string>
+    <string name="edit" translatable="false">edit</string>
+    <string name="save" translatable="false">save</string>
+    <string name="enter_amount_of_sets">Enter amount of sets:</string>
+    <string name="enter_new_sequence_title">Enter new sequence title:</string>
+    <string name="font_size">Font size</string>
+    <string name="sets_font_size">Set font size</string>
+    <string name="select_language">Select language</string>
+    <string name="app_language">App language</string>
+    <string name="language">Language</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="turn_on">Turn on</string>
+    <string name="turn_off">Turn off</string>
+    <string name="delete">Delete</string>
+    <string name="delete_all">Delete all</string>
+    <string name="splash_footer">Designed by Eleonora</string>
+    <string name="settings">Settings</string>
+    <string name="select_font_size">Select font size</string>
+
+    <string-array name="language">
+        <item>Мова</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="language_alias">
+        <item>"be"</item>
+        <item>"en"</item>
+    </string-array>
+
+    <string-array name="text_scale">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Big</item>
+    </string-array>
+
+    <string-array name="text_scale_alias">
+        <item>0.85</item>
+        <item>1.0</item>
+        <item>1.15</item>
+    </string-array>
+
+</resources>

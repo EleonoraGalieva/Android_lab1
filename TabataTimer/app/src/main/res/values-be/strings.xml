@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TabataApplication</string>
+    <string name="create_new_sequence">Стварыць новую трэніроўку</string>
+    <string name="tabata_timer">Табата</string>
+    <string name="create_new_phase">Стварыць новую фазу</string>
+    <string name="add_some_description">Дадаць апісанне</string>
+    <string name="create">Дадаць</string>
+    <string name="enter_amount_of_sets">Увядзiце колькасць сэтаў:</string>
+    <string name="enter_new_sequence_title">Увядзiце новую назву трэніроўкі:</string>
+    <string name="font_size">Вялізна шрыфта</string>
+    <string name="sets_font_size">Усталяваць памер шрыфта</string>
+    <string name="select_language">Выбраць мову</string>
+    <string name="app_language">Мова прылады</string>
+    <string name="language">Мова</string>
+    <string name="dark_theme">Цёмная тэма</string>
+    <string name="turn_on">Уключыць</string>
+    <string name="turn_off">Выключыць</string>
+    <string name="delete">Удалiць</string>
+    <string name="delete_all">Удалiць усё</string>
+    <string name="splash_footer">Зроблена Элеанорай</string>
+    <string name="settings">Налады</string>
+    <string name="select_font_size">Выбраць памер шрыфта</string>
+
+    <string-array name="text_scale">
+        <item>Маленькі</item>
+        <item>Звычайны</item>
+        <item>Вялікі</item>
+    </string-array>
+</resources>
