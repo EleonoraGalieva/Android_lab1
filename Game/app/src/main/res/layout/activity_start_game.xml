@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StartGameActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/getUsersProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/roomNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/enter_a_room_name" />
+
+    <TextView
+        android:id="@+id/availableUsersTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roomNameInput"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/available_users"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/usersList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/availableUsersTv" />
+
+    <TextView
+        android:id="@+id/yourRoomsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usersList"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/your_rooms"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roomsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/yourRoomsTv"
+        android:layout_marginTop="10dp"
+        android:layout_alignEnd="@+id/btnCreateRoom"
+        android:layout_alignRight="@+id/btnCreateRoom" />
+
+    <Button
+        android:id="@+id/btnCreateRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roomsList"
+        android:onClick="createNewRoom"
+        android:text="@string/create_new_room" />
+
+</RelativeLayout>
